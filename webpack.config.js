@@ -3,7 +3,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const webpack = require('webpack');
 module.exports = {
   mode: 'development',
   entry: { main: './src/index.js' },
@@ -11,6 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js'
   },
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist',
     hot: true,
@@ -32,7 +32,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin('dist', {}),
+    new CleanWebpackPlugin('dist'),
     new HtmlWebpackPlugin({
       inject: false,
       hash: true,
