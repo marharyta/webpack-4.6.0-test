@@ -3,13 +3,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-
-const baseConfig = {
+module.exports = {
   entry: { main: './src/index.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js'
   },
+  devtool: 'cheap-module-source-map',
   devServer: {
     contentBase: './dist',
     hot: true,
@@ -20,13 +20,7 @@ const baseConfig = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [
-          { loader: 'babel-loader' },
-          {
-            loader: 'eslint-loader',
-            options: { formatter: require('eslint/lib/formatters/stylish') }
-          }
-        ]
+        use: [{ loader: 'babel-loader' }]
       }
     ]
   },
@@ -41,9 +35,3 @@ const baseConfig = {
     new WebpackMd5Hash()
   ]
 };
-
-if (process.env.NODE_ENV === 'development') {
-  baseConfig.devtool = 'inline-source-map';
-}
-
-module.exports = baseConfig

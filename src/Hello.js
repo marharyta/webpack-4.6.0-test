@@ -7,6 +7,7 @@ class Hello extends React.Component {
     console.log('Hello from the console, this should point to Hello.js line 7');
   }
   render() {
+    console.log(hello.world);
     return <div>{this.props.hello}</div>;
   }
 }
